@@ -1,7 +1,9 @@
-import { isNotEmpty } from 'class-validator';
+import { isNotEmpty } from "class-validator";
+
 
 export class CreateNotificationBody {
-  @isNotEmpty()
+
+  @isNotEmpty(teste: 'nao pode ser vazio')
   recipientId: string;
 
   content: string;
