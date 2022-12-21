@@ -1,5 +1,6 @@
 import { Content } from "@application/entities/content";
 import { Replace } from "@helpers/Replace";
+import { randomUUID } from "node:crypto";
 
 export interface NotificationProps {
   recipientId: string;
@@ -10,15 +11,21 @@ export interface NotificationProps {
 }
 
 export class Notification {
+  private _id: string;
   private props: NotificationProps;
 
   //usa o replace para deixar opcional o campo de createAt no construtor
   constructor(props: Replace<NotificationProps, { createAt?: Date }>) {
+    this._id = randomUUID();
     //verifica se tem a data, se nao tiver ele cria
     this.props = {
       ...props,
       createAt: props.createAt ?? new Date(),
     }
+  }
+
+  public get id(){
+    return this._id;
   }
 
   public set content(content: Content){
